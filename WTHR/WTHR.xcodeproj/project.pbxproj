@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3DECBF06B0F28E026BD1564F /* libPods-WTHR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F14245E11D152A7DA2F468 /* libPods-WTHR.a */; };
 		A78711A4282CB07200989905 /* WTHRApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78711A3282CB07200989905 /* WTHRApp.swift */; };
 		A78711A6282CB07200989905 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78711A5282CB07200989905 /* ContentView.swift */; };
 		A78711A8282CB07300989905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A78711A7282CB07300989905 /* Assets.xcassets */; };
@@ -14,11 +15,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		38F14245E11D152A7DA2F468 /* libPods-WTHR.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WTHR.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52399B844724BA1F65C96914 /* Pods-WTHR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTHR.release.xcconfig"; path = "Target Support Files/Pods-WTHR/Pods-WTHR.release.xcconfig"; sourceTree = "<group>"; };
 		A78711A0282CB07200989905 /* WTHR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WTHR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A78711A3282CB07200989905 /* WTHRApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WTHRApp.swift; sourceTree = "<group>"; };
 		A78711A5282CB07200989905 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A78711A7282CB07300989905 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A78711AA282CB07300989905 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BA21B7CAEA390E6DC2DE4A26 /* Pods-WTHR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTHR.debug.xcconfig"; path = "Target Support Files/Pods-WTHR/Pods-WTHR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,17 +30,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DECBF06B0F28E026BD1564F /* libPods-WTHR.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08D3AFFEB8BF3C7B6141B64D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA21B7CAEA390E6DC2DE4A26 /* Pods-WTHR.debug.xcconfig */,
+				52399B844724BA1F65C96914 /* Pods-WTHR.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
 		A7871197282CB07200989905 = {
 			isa = PBXGroup;
 			children = (
 				A78711A2282CB07200989905 /* WTHR */,
 				A78711A1282CB07200989905 /* Products */,
+				08D3AFFEB8BF3C7B6141B64D /* Pods */,
+				F4B9D2119CEEBBED37EFC0AD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +84,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		F4B9D2119CEEBBED37EFC0AD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				38F14245E11D152A7DA2F468 /* libPods-WTHR.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A78711AE282CB07300989905 /* Build configuration list for PBXNativeTarget "WTHR" */;
 			buildPhases = (
+				D1CAE3C37C29CC9061F8DFF0 /* [CP] Check Pods Manifest.lock */,
 				A787119C282CB07200989905 /* Sources */,
 				A787119D282CB07200989905 /* Frameworks */,
 				A787119E282CB07200989905 /* Resources */,
+				A78711B1282CBA6700989905 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,50 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A78711B1282CBA6700989905 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Check if swiftlint is present. If so run swiftlint, otherwise warn user\nif which \"${PODS_ROOT}/SwiftLint/swiftlint\" >/dev/null; then\n    \"${PODS_ROOT}/SwiftLint/swiftlint\"\nelse\n    echo \"warning: SwiftLint not installed. Please see configuration to ensure SwiftLint was installed properly.\"\nfi\n";
+		};
+		D1CAE3C37C29CC9061F8DFF0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WTHR-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A787119C282CB07200989905 /* Sources */ = {
@@ -261,6 +332,7 @@
 		};
 		A78711AF282CB07300989905 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA21B7CAEA390E6DC2DE4A26 /* Pods-WTHR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -290,6 +362,7 @@
 		};
 		A78711B0282CB07300989905 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52399B844724BA1F65C96914 /* Pods-WTHR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
