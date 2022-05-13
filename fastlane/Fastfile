@@ -15,19 +15,30 @@
 
 default_platform(:ios)
 
+# All lanes for the iOS app 
 platform :ios do
-  desc "Description of what the lane does"
+  desc "Signs the iOS application with the proper certificate and installs proper provisioning profiles"
   lane :signing do
     # add actions here: https://docs.fastlane.tools/actions
   end
 
+  desc "Building WTHR ipa file" 
   lane :build do 
-    desc "Building WTHR ipa file"
     # Build iOS application ipa file
+    signing
+    gym(
+	scheme: "WTHR",
+	workspace: "WTHR.xcworkspace",
+	export_method: "development",
+	configuration: "Debug",
+	clean: true,
+	output_directory: "build",
+	output_name: "wthr"
+    )
   end
 
+  desc "Release IPA to firebase"
   lane :release do
-    desc "Releasing WTHR to TestFlight channel"
     # release app to app store 
   end
 end

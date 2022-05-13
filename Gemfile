@@ -4,3 +4,4 @@ source "https://rubygems.org"
 # In this project, we only need Fastlane at the moment and that is what we list
 # as a dependency.
 gem "fastlane"
+gem "dotenv"
