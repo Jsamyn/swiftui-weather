@@ -1,8 +1,16 @@
 # Contains bundle identifier and Apple ID if it is needed. It is possible to use an App Store Connect API Key
 
-app_identifier("com.example.WTHR") # The bundle identifier of your app
+# Team name for app
+team_name("Joseph Samyn")
+
+app_identifier("com.joesamyn.WTHR") # The bundle identifier of your app
 # apple_id("[[APPLE_ID]]") # Your Apple email address
 
+# App Store Connect Team ID
+#itc_team_id("3JLTAQR626")
+
+# Developer Portal Team ID
+team_id("3JLTAQR626")
 
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile

@@ -17,15 +17,23 @@ default_platform(:ios)
 
 # All lanes for the iOS app 
 platform :ios do
+
+  #
+  # This lane is used to sign the adhoc and app store versions of the application 
+  #
   desc "Signs the iOS application with the proper certificate and installs proper provisioning profiles"
   lane :signing do
     # add actions here: https://docs.fastlane.tools/actions
   end
 
+  # 
+  # This lane is used for building the development/debug version
+  # of the WTHR application. It does not include unit tests or 
+  # UI tests. 
+  # 
   desc "Building WTHR ipa file" 
-  lane :build do 
+  lane :build_debug do 
     # Build iOS application ipa file
-    signing
     gym(
 	scheme: "WTHR",
 	workspace: "WTHR.xcworkspace",
@@ -37,8 +45,62 @@ platform :ios do
     )
   end
 
+  #
+  # This lane is used for building the adhoc version of the appliction for firebase
+  # distribution
+  #
+  desc "Build ad-hoc app version for firebase"
+  lane :build_adhoc do
+    # Building adhoc app version for firebase
+    signing
+  end
+  
+  # 
+  # This lane is used to release the WTHR IPA to firebase 
+  # for internal testing. 
+  # 
   desc "Release IPA to firebase"
   lane :release do
     # release app to app store 
   end
+
+  # 
+  # This lane is used for syncing all necessary certificates and profiles
+  # from the apple developer account for the WTHR application.
+  #  
+  desc "Sync certificates from the GIT repo"
+  lane :sync_certificates do 
+    # Sync development certificates and profiles
+    sync_code_signing(
+	type: "development",
+	app_identifier: ['com.joesamyn.WTHR'],
+	force_for_new_devices: true,
+	readonly: true
+     )
+
+    # Sync Ad-Hoc certificates and profiles
+    sync_code_signing(
+	type: "adhoc",
+	force_for_new_devices: true,
+	readonly: true
+    )
+  end
+
+  #
+  # This lane is used for creating new certificates and profiles
+  # for the WTHR application. 
+  # 
+  desc "Generate new certificates and profiles"
+  lane :create_certificates do 
+    # Generate new certificates and profiles for development
+    sync_code_signing(
+	type: "development",
+	app_identifier: ['com.joesamyn.WTHR'],
+	force_for_new_devices: true,
+	readonly: false
+    )
+
+    # TODO: repeat for ad-hoc once development is tested and working 
+
+  end 
 end

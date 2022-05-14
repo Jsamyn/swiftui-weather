@@ -23,13 +23,21 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Signs the iOS application with the proper certificate and installs proper provisioning profiles
 
-### ios build
+### ios build_debug
 
 ```sh
-[bundle exec] fastlane ios build
+[bundle exec] fastlane ios build_debug
 ```
 
 Building WTHR ipa file
+
+### ios build_adhoc
+
+```sh
+[bundle exec] fastlane ios build_adhoc
+```
+
+Build ad-hoc app version for firebase
 
 ### ios release
 
@@ -38,6 +46,22 @@ Building WTHR ipa file
 ```
 
 Release IPA to firebase
+
+### ios sync_certificates
+
+```sh
+[bundle exec] fastlane ios sync_certificates
+```
+
+Sync certificates from the GIT repo
+
+### ios create_certificates
+
+```sh
+[bundle exec] fastlane ios create_certificates
+```
+
+Generate new certificates and profiles
 
 ----
 
