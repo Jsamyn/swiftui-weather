@@ -19,11 +19,23 @@ default_platform(:ios)
 platform :ios do
 
   #
+  # Steps to run before running any lane 
+  #
+  before_all do
+    Dotenv.load ".env.default"
+  end
+
+  #
   # This lane is used to sign the adhoc and app store versions of the application 
   #
   desc "Signs the iOS application with the proper certificate and installs proper provisioning profiles"
   lane :signing do
-    # add actions here: https://docs.fastlane.tools/actions
+   
+    # Sync the certificates before signing any application
+    sync_certificates
+
+    # Create dictionary to hold adhoc profile for easy lookup
+    
   end
 
   # 
@@ -40,7 +52,7 @@ platform :ios do
 	export_method: "development",
 	configuration: "Debug",
 	clean: true,
-	output_directory: "build",
+	output_directory: "build/debug",
 	output_name: "wthr"
     )
   end
@@ -52,7 +64,20 @@ platform :ios do
   desc "Build ad-hoc app version for firebase"
   lane :build_adhoc do
     # Building adhoc app version for firebase
+    # Sign files first
     signing
+
+    # Build ipa using GYM
+    gym(
+	scheme: "WTHR",
+ 	workspace: "WTHR.xcworkspace",
+	export_method: "ad-hoc",
+	configuration: "Release",
+	clean: true,
+	output_directory: "build/adhoc",
+	output_name: "wthr"
+    )
+    
   end
   
   # 
@@ -100,7 +125,12 @@ platform :ios do
 	readonly: false
     )
 
-    # TODO: repeat for ad-hoc once development is tested and working 
+    # Generate new adhoc certificate for firebase 
+    sync_code_signing(
+	type: "adhoc",
+	force_for_new_devices: true,
+	readonly: false
+    )
 
   end 
 end
